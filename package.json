@@ -1,0 +1,38 @@
+{
+  "name": "nodejs-homeworks",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".eslintrc.js",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "joi": "^17.3.0",
+    "lowdb": "^1.0.0",
+    "morgan": "^1.10.0",
+    "uuid": "^8.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "data/*.*"
+    ]
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guldron-edu/NodeJS-homeworks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guldron-edu/NodeJS-homeworks/issues"
+  }
+}
