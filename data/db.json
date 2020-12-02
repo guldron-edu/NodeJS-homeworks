@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "id": "94aa5981-7e28-4d42-930b-e039a8c7e904",
+      "name": "BobbyFisher",
+      "email": "test@gmail.com",
+      "phone": "1234567890"
+    },
+    {
+      "id": "617cb7cc-8995-49ba-b687-19d91d1ef963",
+      "name": "Petr",
+      "email": "test@gmail.com",
+      "phone": "077211311341"
+    },
+    {
+      "id": "c371a9fc-a6a3-454f-b5aa-58e243bb9ba4",
+      "name": "Bobby HoPS",
+      "email": "test@gmail.com",
+      "phone": "1234567890"
+    },
+    {
+      "id": "7707939f-3896-4521-902f-cddec7144eaf",
+      "name": "Bobby HoPS",
+      "email": "test@gmail.com",
+      "phone": "123123123123"
+    }
+  ]
+}
