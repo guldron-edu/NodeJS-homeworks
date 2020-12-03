@@ -1,28 +1,24 @@
-const { HttpCode } = require("../helpers/constants.js");
-const { ContactsService } = require("../services/");
+const HttpCode = require("../helpers/constants.js");
+const ContactsService = require("../services/");
 
 const contactsService = new ContactsService();
 
 const listContacts = async (req, res, next) => {
   try {
-    const userId = req.user._id;
-
-    const contacts = await contactsService.listContacts(req.query, userId);
-    return res.status(HttpCode.OK).json({
+    const contacts = await contactsService.listContacts();
+    res.status(HttpCode.OK).json({
       status: HttpCode.OK,
       data: {
-        ...contacts,
+        contacts,
       },
     });
   } catch (e) {
-    return next(e);
+    next(e);
   }
 };
 const getById = async (req, res, next) => {
-  const userId = req.user._id;
-
   try {
-    const contact = await contactsService.getById(req.params, userId);
+    const contact = await contactsService.getById(req.params);
     if (contact) {
       return res.status(HttpCode.OK).json({
         status: HttpCode.OK,
@@ -41,15 +37,11 @@ const getById = async (req, res, next) => {
   }
 };
 const addContact = async (req, res, next) => {
-  const userId = req.user._id;
-  const { name, email, phone, subscription, password, token } = req.body;
-
+  // const { name, email, phone } = req.body;
   try {
-    const contact = await contactsService.addContact(
-      { name, email, phone, subscription, password, token },
-      userId
-    );
-tatus(HttpCode.CREATED).json({
+    // if (!req.body.name || !req.body.email || !req.body.phone) { }
+    const contact = await contactsService.addContact(req.body);
+    return res.status(HttpCode.CREATED).json({
       status: HttpCode.CREATED,
       data: {
         contact,
@@ -61,19 +53,13 @@ tatus(HttpCode.CREATED).json({
 };
 const update = async (req, res, next) => {
   try {
-    const userId = req.user._id;
-
     if (!req.body) {
       return next({
         status: HttpCode.BAD_REQUEST,
         message: "missing fields",
       });
     } else {
-      const contact = await contactsService.update(
-        req.params,
-        req.body,
-        userId
-      );
+      const contact = await contactsService.update(req.params, req.body);
       if (contact) {
         return res.status(HttpCode.OK).json({
           status: HttpCode.OK,
@@ -95,12 +81,7 @@ const update = async (req, res, next) => {
 
 const removeContact = async (req, res, next) => {
   try {
-    const userId = req.user._id;
-
-    const contact = await contactsService.removeContact(
-      req.params.contactId,
-      userId
-    );
+    const contact = await contactsService.removeContact(req.params.contactId);
     if (contact) {
       return res.status(HttpCode.OK).json({
         status: HttpCode.OK,
