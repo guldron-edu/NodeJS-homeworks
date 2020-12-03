@@ -1,4 +1,4 @@
-const ContactsRepository = require("../repo");
+const { ContactsRepository } = require("../repo");
 
 class ContactsService {
   constructor() {
@@ -6,24 +6,24 @@ class ContactsService {
       contacts: new ContactsRepository(),
     };
   }
-  listContacts() {
-    const data = this.repositories.contacts.listContacts();
+  listContacts(query, userId) {
+    const data = this.repositories.contacts.listContacts(query, userId);
     return data;
   }
-  getById({ contactId }) {
-    const data = this.repositories.contacts.getById(contactId);
+  getById({ contactId }, userId) {
+    const data = this.repositories.contacts.getById(contactId, userId);
     return data;
   }
-  addContact(body) {
-    const data = this.repositories.contacts.addContact(body);
+  addContact(body, userId) {
+    const data = this.repositories.contacts.addContact(body, userId);
     return data;
   }
-  update({ contactId }, body) {
-    const data = this.repositories.contacts.update(contactId, body);
+  update({ contactId }, body, userId) {
+    const data = this.repositories.contacts.update(contactId, body, userId);
     return data;
   }
-  removeContact(contactId) {
-    const data = this.repositories.contacts.removeContact(contactId);
+  removeContact(contactId, userId) {
+    const data = this.repositories.contacts.removeContact(contactId, userId);
     return data;
   }
 }
