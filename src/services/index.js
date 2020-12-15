@@ -1,5 +1,5 @@
 const ContactsService = require("./contactsService.js");
-const AuthService = require("./authService.js");
-const UsersService = require("./userService.js");
+const authService = require("./authService.js");
+const usersService = require("./userService.js");
 
-module.exports = { ContactsService, AuthService, UsersService };
+module.exports = { ContactsService, authService, usersService };

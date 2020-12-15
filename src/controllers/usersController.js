@@ -53,7 +53,7 @@ const updateSub = async (req, res, next) => {
 
 const updateAvatar = async (req, res, next) => {
   try {
-    const userId = req.user._id;
+    // const userId = req.user._id;
     const userEmail = req.user.email;
     const pathFile = req.file.path;
     const url = await usersService.updateAvatar(userEmail, pathFile);

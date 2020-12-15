@@ -62,5 +62,5 @@ class UsersService {
     return avatarUrl;
   }
 }
-
-module.exports = UsersService;
+const usersService = new UsersService();
+module.exports = usersService;

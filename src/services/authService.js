@@ -1,7 +1,6 @@
 const { UsersRepository } = require("../repo");
 const jwt = require("jsonwebtoken");
-
-const { check } = require("../helpers/pass.js");
+const pass = require("../helpers/pass.js");
 require("dotenv").config();
 
 const S_KEY = process.env.JWT_KEY;
@@ -14,7 +13,7 @@ class AuthService {
   }
   async login(email, password) {
     const user = await this.repositories.users.getByEmail(email);
-    const checkPass = user ? await check(password, user.password) : null;
+    const checkPass = user ? await pass.check(password, user.password) : null;
 
     if (!user || !checkPass) {
       return null;
@@ -22,19 +21,16 @@ class AuthService {
     const id = user.id;
 
     const payload = { id };
-    const token = jwt.sign(payload, S_KEY, { expiresIn: "24h" });
-
+    const token = await jwt.sign(payload, S_KEY, { expiresIn: "24h" });
     await this.repositories.users.updateToken(id, token);
     return { user, token };
   }
   async logout(userId) {
-    console.log("+++Servise");
-
-    // const data = await this.repositories.users.updateToken(userId, null);
     await this.repositories.users.updateToken(userId, null);
     return;
-    // return data;
   }
 }
 
-module.exports = AuthService;
+const authService = new AuthService();
+
+module.exports = authService;

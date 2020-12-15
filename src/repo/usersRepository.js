@@ -17,19 +17,7 @@ class UsersRepository {
   }
 
   async updateToken(id, token) {
-    console.log(
-      "🚀 ~ file: usersRepository.js ~ line 20 ~ UsersRepository ~ updateToken ~ token",
-      token
-    );
-    console.log(
-      "🚀 ~ file: usersRepository.js ~ line 20 ~ UsersRepository ~ updateToken ~ id",
-      id
-    );
-    console.log("+++Repo");
-
     await this.model.updateOne({ _id: id }, { token });
-    console.log("+++RepoAfter");
-
     return;
   }
 
@@ -48,5 +36,4 @@ class UsersRepository {
     return user;
   }
 }
-
 module.exports = UsersRepository;

@@ -1,21 +1,18 @@
 const { HttpCode } = require("../helpers/constants.js");
-const { AuthService, UsersService } = require("../services/");
-
-const authService = new AuthService();
-const usersService = new UsersService();
+const { authService, usersService } = require("../services/");
 
 const reg = async (req, res, next) => {
-  const { email, password, subscription } = req.body;
-
-  const searchedUser = await usersService.getByEmail(email);
-
-  if (searchedUser) {
-    return next({
-      status: HttpCode.CONFLICT,
-      message: "Email in use",
-    });
-  }
   try {
+    const { email, password, subscription } = req.body;
+    const searchedUser = await usersService.getByEmail(email);
+
+    if (searchedUser) {
+      return next({
+        status: HttpCode.CONFLICT,
+        message: "Email in use",
+      });
+    }
+
     const newUser = await usersService.addUser({
       email,
       password,
@@ -35,9 +32,7 @@ const reg = async (req, res, next) => {
 };
 
 const login = async (req, res, next) => {
-  console.log(res.status().json(1));
   const { email, password } = req.body;
-  console.log("++");
 
   try {
     const response = await authService.login(email, password);
@@ -67,8 +62,6 @@ const login = async (req, res, next) => {
 const logout = async (req, res, next) => {
   try {
     const userId = req.user.id;
-    console.log("+++Controller");
-
     await authService.logout(userId);
     return res.status(HttpCode.NO_CONTENT).json({
       status: HttpCode.NO_CONTENT,
